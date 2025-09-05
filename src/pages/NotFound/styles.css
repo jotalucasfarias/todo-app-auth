@@ -72,7 +72,7 @@
 /* Dark mode básico */
 @media (prefers-color-scheme: dark) {
   .page-404 {
-    background: #0f1115;
+    background: transparent;
     color: #e5e7eb;
   }
   .page-404-code {
