@@ -14,15 +14,15 @@ export default function Register() {
   async function handleRegister(e) {
     e.preventDefault();
 
-    if(email !== '' && password !== ''){
+    if (email !== "" && password !== "") {
       await createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigate("/", { replace: true });
-      })
-      .catch((error) => {
-        alert("Erro ao cadastrar!");
-      });
-    } else{
+        .then(() => {
+          navigate("/", { replace: true });
+        })
+        .catch((error) => {
+          alert("Erro ao cadastrar!");
+        });
+    } else {
       alert("Preencha todos os campos!");
     }
   }
@@ -49,9 +49,12 @@ export default function Register() {
         <button type="submit">Cadastrar</button>
       </form>
 
-      <Link className="button-link" to="/">
-        Já tem uma conta? Faça login!
-      </Link>
+      <p className="texto-link">
+        Já tem uma conta?{" "}
+        <Link className="link-acao" to="/">
+          Faça login!
+        </Link>
+      </p>
     </div>
   );
 }

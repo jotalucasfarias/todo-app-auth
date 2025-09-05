@@ -1,0 +1,260 @@
+/* =========================
+   Variáveis e reset
+   ========================= */
+:root{
+  --bg: #0b0f14;
+  --surface: #0f1720;
+  --card: #0f1a2b;
+  --muted: #94a3b8;
+  --text: #e6eef6;
+  --accent: #7c3aed; /* roxo */
+  --success: #10b981; /* verde */
+  --danger: #ef4444; /* vermelho */
+  --glass: rgba(255,255,255,0.03);
+  --radius: 10px;
+  --gap: 16px;
+  --max-width: 960px;
+  --transition: 180ms ease;
+  font-size: 16px;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.06), transparent),
+              radial-gradient(900px 400px at 90% 90%, rgba(6,182,212,0.03), transparent),
+              var(--bg);
+  color:var(--text);
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:24px;
+  line-height:1.4;
+}
+
+/* =========================
+   Layout principal (ajuste para alinhamento uniforme)
+   ========================= */
+.admin-container, .container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: calc(var(--radius) + 4px);
+  padding: 28px;
+  box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  width: 100%;
+}
+
+/* Cabeçalho */
+.admin-container > h1{
+  margin:0 0 12px 0;
+  font-size:1.5rem;
+  letter-spacing: -0.2px;
+  color: var(--text);
+}
+
+/* =========================
+   Formulário e inputs (forçar dimensões consistentes)
+   ========================= */
+.form, .formulario {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom: 18px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: flex-start; /* botão fica alinhado à esquerda por padrão */
+}
+
+/* Textarea (assegura que ocupe exatamente o espaço disponível) */
+.form textarea{
+  width:100%;
+  min-height:88px;
+  max-height:220px;
+  /* removed user-resize to keep layout consistente */
+  resize: none;
+  padding:12px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  color:var(--text);
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:8px;
+  outline:none;
+  transition: box-shadow var(--transition), border-color var(--transition);
+  font-size:0.95rem;
+  box-sizing: border-box;
+  overflow: auto; /* permite rolagem interna quando o conteúdo exceder */
+}
+
+/* Placeholder e foco */
+.form textarea::placeholder{ color: var(--muted); }
+.form textarea:focus{
+  box-shadow: 0 6px 20px rgba(124,58,237,0.12);
+  border-color: rgba(124,58,237,0.6);
+}
+
+/* =========================
+   Botões — estilo base
+   ========================= */
+button{
+  cursor:pointer;
+  border:0;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:0.95rem;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* Registrar / Atualizar */
+.btn-register, .botao-registrar {
+  background: linear-gradient(90deg, var(--accent), rgba(124,58,237,0.8));
+  color: white;
+  box-shadow: 0 6px 24px rgba(124,58,237,0.12);
+  align-self: flex-start;
+  min-width: 160px; /* evita botão muito estreito em telas maiores */
+}
+.btn-register:hover{ transform: translateY(-2px); }
+.btn-register:active{ transform: translateY(0); }
+
+/* Logout */
+.btn-logout, .botao-sair {
+  background: transparent;
+  color: var(--muted);
+  padding:8px 12px;
+  align-self:flex-end;
+  border-radius:6px;
+  border:1px solid rgba(255,255,255,0.03);
+}
+.btn-logout:hover{
+  color:var(--text);
+  border-color: rgba(255,255,255,0.06);
+  transform: translateY(-2px);
+}
+
+/* Editar / Concluir — botões nas tarefas */
+.btn-edit, .botao-editar {
+  background: transparent;
+  color: var(--accent);
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid rgba(124,58,237,0.12);
+}
+.btn-edit:hover{ background: rgba(124,58,237,0.04); transform: translateY(-2px); }
+
+.btn-delete, .botao-concluir {
+  background: linear-gradient(90deg, rgba(16,185,129,0.95), rgba(16,185,129,0.84));
+  color:#042018;
+  padding:8px 10px;
+  border-radius:6px;
+  border: none;
+}
+.btn-delete:hover{ box-shadow:0 8px 30px rgba(16,185,129,0.10); transform: translateY(-2px); }
+
+/* Botões pequenos em listas */
+.list-tasks button{
+  font-size:0.85rem;
+}
+
+/* =========================
+   Lista de tarefas (mesma largura do formulário)
+   ========================= */
+.list-tasks, .lista-tarefas {
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+  border-radius: 10px;
+  padding: 12px; /* mantém a mesma sensação de espaçamento que o textarea */
+  margin-bottom: 10px; /* ligeiramente menor para alinhar visualmente com form */
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  border:1px solid rgba(255,255,255,0.03);
+  transition: transform var(--transition), box-shadow var(--transition);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.list-tasks:hover{ transform: translateY(-2px); box-shadow:0 10px 40px rgba(2,6,23,0.6); }
+
+/* Texto da tarefa */
+.list-tasks p{
+  margin:0;
+  color:var(--text);
+  flex:1 1 auto;
+  padding-right:8px;
+  word-break:break-word;
+  white-space:pre-wrap;
+  font-size:0.98rem;
+}
+
+/* Grupo de ações */
+.list-tasks > div{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-shrink:0;
+}
+
+/* Campo obrigatório vazio: efeito sutil de erro */
+.form textarea[aria-invalid="true"], .form textarea.error {
+  border-color: rgba(239,68,68,0.9);
+  box-shadow: 0 6px 20px rgba(239,68,68,0.12);
+}
+
+/* Focus acessível para teclado */
+button:focus, .form textarea:focus{
+  outline: 3px solid rgba(124,58,237,0.14);
+  outline-offset: 3px;
+}
+
+/* =========================
+   Responsividade
+   ========================= */
+@media (max-width: 720px){
+  body{ padding:16px; }
+  .admin-container{ padding:18px; border-radius:12px; }
+
+  .list-tasks{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+
+  .list-tasks > div{
+    justify-content:flex-end;
+  }
+
+  .btn-logout{ align-self:stretch; text-align:center; }
+}
+
+@media (max-width: 420px){
+  :root{ font-size:15px; }
+  .form textarea{ min-height:80px; }
+  .btn-register{ width:100%; justify-content:center; min-width: unset; }
+  .list-tasks p{ font-size:0.95rem; }
+}
+
+/* Larguras maiores: mantém o card mais "quadrado" em telas amplas */
+@media (min-width: 1280px){
+  :root{ --max-width: 900px; }
+}
+
+@media (min-width: 1536px){
+  :root{ --max-width: 960px; }
+}
+
+/* =========================
+   Pequenos detalhes finais
+   ========================= */
+/* Evitar repetição de estilos em aliases (mantém coerência caso altere JSX) */
+.container{ /* alias para admin-container */ }
+.lista-tarefas{ /* alias para list-tasks */ }
+.botao-remover{ /* alias para btn-delete */ }

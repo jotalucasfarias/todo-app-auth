@@ -50,12 +50,17 @@ export default function Home() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Acessar</button>
+        <button type="submit" aria-label="Acessar">
+          Acessar
+        </button>
       </form>
 
-      <Link className="button-link" to="/register">
-        Não tem uma conta? Cadastre-se
-      </Link>
+      <p className="texto-link">
+        Não tem uma conta?{" "}
+        <Link className="link-acao" to="/register">
+          Cadastre-se
+        </Link>
+      </p>
     </div>
   );
 }
